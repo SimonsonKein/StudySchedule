@@ -33,14 +33,18 @@ const TabScreen = ({ date, functio }: tabScreenType) => {
 };
 
 const renderScreens = (tabsDate: any, handleAddDate: any) => {
-  return tabsDate.map((item) => (
-    <Tab.Screen
-      key={item}
-      name={`${item}`}
-      component={() => <TabScreen functio={handleAddDate} date={item} />}
-      initialParams={{ item }}
-    />
-  ));
+  return (
+    <>
+      {tabsDate.map((item) => (
+        <Tab.Screen
+          key={item}
+          name={`${item}`}
+          component={() => <TabScreen functio={handleAddDate} date={item} />}
+          initialParams={{ item }}
+        />
+      ))}
+    </>
+  );
 };
 
 const TabsScreen = () => {
@@ -88,8 +92,11 @@ const TabsScreen = () => {
   //     setSelectedDate(addDays(selectedDate, 1));
   //   };
   useEffect(() => {}, [tabsDate.length]);
+
+  const key = tabsDate.length.toString();
   return (
     <Tab.Navigator
+      key={key}
       initialRouteName={`${tabsDate[1]}`}
       screenOptions={{
         tabBarScrollEnabled: true,
